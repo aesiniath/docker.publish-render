@@ -1,10 +1,10 @@
-FROM oprdyn/haskell:lts-12.20 as build
+FROM docker.io/oprdyn/haskell:lts-12.24 as build
 
 #
 # Make binary in build container
 #
 
-RUN stack build --resolver=lts-12.20 \
+RUN stack build --resolver=lts-12.24 \
         fingertree \
         hinotify \
         pandoc \
@@ -15,15 +15,15 @@ RUN stack build --resolver=lts-12.20 \
 COPY tmp/unbeliever/. /src/unbeliever/
 COPY tmp/publish/. /src/publish/
 WORKDIR /src/publish
-RUN stack install --resolver=lts-12.20 --local-bin-path=/usr/local/bin \
+RUN stack install --resolver=lts-12.24 --local-bin-path=/usr/local/bin \
  && cleanup
 
 #
 # Now make target container
 #
 
-FROM oprdyn/debian:stretch
-RUN apt-get install
+FROM docker.io/oprdyn/debian:stretch
+RUN apt-get install \
         libgmp10 \
         zlib1g \
  && apt-get clean
