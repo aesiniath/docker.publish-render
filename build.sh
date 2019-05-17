@@ -9,8 +9,11 @@
 rsync -av --exclude=.git --exclude=.stack-work ~/src/oprdyn/unbeliever tmp
 rsync -av --exclude=.git --exclude=.stack-work ~/src/oprdyn/publish tmp
 
+RESOLVER=`head -1 RESOLVER`
+
 docker build \
-	--tag=afcowie/publish-render:latest \
-	--network=proxy \
+	--tag oprdyn/publish-render:latest \
+	--network proxy \
+    --build-arg RESOLVER=${RESOLVER} \
 	.
 
