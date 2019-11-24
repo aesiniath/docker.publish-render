@@ -22,7 +22,7 @@ RUN stack install --resolver=lts-14.15 --local-bin-path=/usr/local/bin \
 # Now make target container
 #
 
-FROM docker.io/oprdyn/debian:stretch
+FROM docker.io/oprdyn/debian:buster
 RUN apt-get install \
         libgmp10 \
         zlib1g \
