@@ -1,10 +1,10 @@
-FROM docker.io/oprdyn/haskell:lts-13.14 as build
+FROM docker.io/oprdyn/haskell:lts-13.25 as build
 
 #
 # Make binary in build container
 #
 
-RUN stack build --resolver=lts-13.14 \
+RUN stack build --resolver=lts-13.25 \
         fingertree \
         hinotify \
         pandoc \
@@ -15,7 +15,7 @@ RUN stack build --resolver=lts-13.14 \
 COPY tmp/unbeliever/. /src/unbeliever/
 COPY tmp/publish/. /src/publish/
 WORKDIR /src/publish
-RUN stack install --resolver=lts-13.14 --local-bin-path=/usr/local/bin \
+RUN stack install --resolver=lts-13.25 --local-bin-path=/usr/local/bin \
  && cleanup
 
 #
