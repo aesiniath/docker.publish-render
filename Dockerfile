@@ -1,5 +1,5 @@
 ARG RESOLVER
-FROM docker.io/oprdyn/haskell:${RESOLVER} as build
+FROM docker.io/aesiniath/haskell:${RESOLVER} as build
 ARG RESOLVER
 
 #
@@ -24,7 +24,7 @@ RUN stack install --resolver=${RESOLVER} --local-bin-path=/usr/local/bin \
 # Now make target container
 #
 
-FROM docker.io/oprdyn/debian:buster
+FROM docker.io/aesiniath/debian:buster
 RUN apt-get install \
         libgmp10 \
         zlib1g \
